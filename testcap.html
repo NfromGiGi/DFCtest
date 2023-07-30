@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>來拍個照吧</div>
+    <!-- 開啟 前鏡頭 錄影、拍照 -->
+    <div>前鏡頭</div>
+<input type="file" capture="user" accept="video/*"/>
+<input name="myfile" type="file" capture="user" accept="image/*"/>
+顯示結果
+<img id="image">
+<script>
+    document.getElementById('files').onchange = function () {
+  var src = URL.createObjectURL(this.files[0])
+  document.getElementById('image').src = src
+}
+</script>
+
+
+<!-- 開啟 後鏡頭 錄影、拍照 -->
+<div>後鏡頭</div>
+<input type="file" capture="environment" accept="video/*"/>
+<input type="file" capture="environment" accept="image/*"/>
+
+
+
+<!--測試-->
+<div>國外測試
+</div>
+<input type="file" accept="image/*" id="file-input" />
+<div id="target">You can drag an image file here</div>
+<script>
+  const fileInput = document.getElementById('file-input');
+
+  fileInput.addEventListener('change', (e) =>
+    doSomethingWithFiles(e.target.files),
+  );
+
+
+  const target = document.getElementById('target');
+
+target.addEventListener('drop', (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+
+  doSomethingWithFiles(e.dataTransfer.files);
+});
+
+target.addEventListener('dragover', (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+
+  e.dataTransfer.dropEffect = 'copy';
+});
+</script>
+
+
+
+
+</body>
+</html>
