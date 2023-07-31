@@ -20,7 +20,7 @@ body {
 @media screen and (max-width: 640px) {
   main {
     overflow: hidden;
-    weight: 100%;
+    width: 100%;
   }
 }
 
