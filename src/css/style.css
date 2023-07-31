@@ -67,12 +67,7 @@ a:hover {
 
 .main {
   margin: 0 auto;
-  width: 90%;
-}
-@media screen and (max-width: 640px) {
-  .main {
-    width: 40%;
-  }
+  width: 40%;
 }
 
 .from__img {
