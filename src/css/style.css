@@ -66,10 +66,9 @@ a:hover {
 }
 
 .main {
-  width: 40%;
   margin: 0 auto;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 640px) {
   .main {
     width: 90%;
   }
