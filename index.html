@@ -14,7 +14,7 @@
     <!-- place navbar here -->
     </header>
     <main class="main">
-        <form action="#" enctype="multipart/form-data" methpd="post">
+        <form action="#" enctype="multipart/form-data" methpd="post" name="google">
             <label for="bssc">Business card here</label>
             <input type="file" onchange="readURL(this)" accept="image/*" targetID="bssc" name="upload-picture"/><br>
             <img id="bssc" class="from__img"><br>
@@ -30,7 +30,8 @@
     <footer>
     <!-- place footer here -->
     </footer>
-    <script>
+    <script type="text/javascript">
+        const scriptURL='https://script.google.com/macros/s/AKfycbzaZwgRYRIZmEnKNvpN3cBLx_xCFTHo-4yYcnvMh7_q8l0qem1KpHjBCz3BjLzwCv3b/exec'
         //照片預視
         function readURL(input){
         
@@ -53,6 +54,16 @@
         }
 
         }
+
+
+        const form = document.forms['google']
+          
+          form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+              .then(response => alert("上傳成功"))
+              .catch(error => console.error('Error!', error.message))
+          })
     </script>
 </body>
 </html>
