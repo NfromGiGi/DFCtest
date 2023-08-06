@@ -54,14 +54,7 @@
 
         }
 
-        const form = document.forms['google']
-          
-          form.addEventListener('submit', e => {
-            e.preventDefault()
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-              .then(response => alert("上傳成功"))
-              .catch(error => console.error('Error!', error.message))
-          })
+
     </script>
 </body>
 </html>
