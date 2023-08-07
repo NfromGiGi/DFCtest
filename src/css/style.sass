@@ -1,0 +1,76 @@
+// 只是大概設定的顏色，這三個參數可以改，也可以新增更多顏色
+$colorPrimary: #36aaa2
+$colorSecondary: #aace37
+$colorThirdary: #0e5e80
+$colorFourthdary: #f59e19
+$colorFifth: #05a398
+$colorNone: #fff
+$tabletWidth: 1400px
+$padWidth: 1200px
+$phoneWidth: 640px
+
+@mixin pad
+  @media screen and (max-width: $padWidth)
+    @content
+@mixin phone
+  @media screen and (max-width: $phoneWidth)
+    @content
+@mixin tablet
+  @media screen and (max-width: $tabletWidth)
+    @content
+
+html
+  font-size: 22px
+  @include tablet
+    font-size: 20px
+  @include phone
+    font-size: 18px
+
+body
+  font-family: Noto Sans TC!important
+  margin: 0 auto
+
+main
+  @include phone
+    overflow: hidden
+    width: 100%
+
+h1
+  font-size: 2rem
+  margin: 0
+  @include phone
+    font-size: 1.66rem
+h2
+  font-size: 1.4rem
+  margin: 0
+  @include phone
+    font-size: 1rem
+p
+  font-size: 0.9rem
+  line-height: 1.7
+
+a
+  color: $colorNone
+  text-decoration: none
+  &:hover
+    color: $colorNone
+    text-decoration: none
+
+.header
+  &__h1
+    font-size: 30px
+    margin: 2rem 0
+    text-align: center
+    color: red
+
+.main
+  margin: 0 auto
+  width: 40%
+  @include phone
+    width: 90%
+
+.from
+  &__img
+    width: 100%
+    margin:0 auto
+    
