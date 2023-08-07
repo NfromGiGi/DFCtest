@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./src/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://meyerweb.com/eric/tools/css/reset/reset.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <h1 class="header__h1">DFC Customer Profile</h1>
+    <!-- place navbar here -->
+    </header>
+    <main class="main">
+        <form method="POST" action="https://script.google.com/macros/s/AKfycbzaZwgRYRIZmEnKNvpN3cBLx_xCFTHo-4yYcnvMh7_q8l0qem1KpHjBCz3BjLzwCv3b/exec">          
+            <input name="email" type="email" placeholder="Email" required> <input name="name" type="text" placeholder="Name" required>
+            <button type="submit">Send</button>
+        </form>
+    </main>
+    <footer>
+    <!-- place footer here -->
+    </footer>
+    <script type="text/javascript">
+    
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+// Original code from https://github.com/jamiewilson/form-to-google-sheets
+// Updated for 2021 and ES6 standards
+
+const sheetName = 'sheet1'
+const scriptProp = PropertiesService.getScriptProperties()
+
+function initialSetup () {
+  const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+function doPost (e) {
+  const lock = LockService.getScriptLock()
+  lock.tryLock(10000)
+
+  try {
+    const doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    const sheet = doc.getSheetByName(sheetName)
+
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    const nextRow = sheet.getLastRow() + 1
+
+    const newRow = headers.map(function(header) {
+      return header === 'Date' ? new Date() : e.parameter[header]
+    })
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  finally {
+    lock.releaseLock()
+  }
+}
